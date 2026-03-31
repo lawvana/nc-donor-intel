@@ -3,120 +3,110 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NC Judicial Donor Intelligence Dashboard</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Code+Pro:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>NC Judicial Donor Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Code+Pro:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root {
-  --navy:#1B2A4A; --gold:#C9A84C; --gold-light:#E8CC7A;
-  --cream:#F8F5EE; --charcoal:#2C2C2C; --mid:#4A5568;
-  --border:rgba(201,168,76,0.25); --stripe:rgba(201,168,76,0.06);
-  --red:#C0392B; --green:#27AE60;
-}
+:root{--navy:#1B2A4A;--gold:#C9A84C;--gold-light:#E8CC7A;--cream:#F8F5EE;--mid:#4A5568;--border:rgba(201,168,76,0.25);--stripe:rgba(201,168,76,0.06);--red:#C0392B;--green:#27AE60}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--cream);color:var(--charcoal);font-family:'Inter',sans-serif;min-height:100vh}
+body{background:var(--cream);color:#2C2C2C;font-family:'Inter',sans-serif;min-height:100vh}
 
-/* HEADER */
-header{background:var(--navy);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;border-bottom:3px solid var(--gold);position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,.2)}
-.hbadge{font-family:'Source Code Pro',monospace;font-size:.7rem;background:var(--gold);color:var(--navy);padding:4px 12px;border-radius:2px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
-.hmeta{font-family:'Source Code Pro',monospace;font-size:.65rem;color:rgba(255,255,255,.4);text-align:right;line-height:1.6}
+header{background:var(--navy);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:60px;border-bottom:3px solid var(--gold);position:sticky;top:0;z-index:100}
+.hbadge{font-family:'Source Code Pro',monospace;font-size:.7rem;background:var(--gold);color:var(--navy);padding:3px 10px;border-radius:2px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.hmeta{font-family:'Source Code Pro',monospace;font-size:.62rem;color:rgba(255,255,255,.4);text-align:right;line-height:1.6}
 .hmeta strong{color:var(--gold)}
 
-/* HERO */
-.hero{background:linear-gradient(135deg,var(--navy) 0%,#243656 60%,#1a3a6b 100%);padding:2.5rem 2rem 2rem;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-60px;right:-60px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.1) 0%,transparent 70%);pointer-events:none}
-.hero h1{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:900;color:white;line-height:1.15;margin-bottom:.5rem}
-.hero h1 em{color:var(--gold);font-style:normal}
-.hero p{color:rgba(255,255,255,.55);font-size:.9rem;max-width:520px;line-height:1.6;margin-bottom:1.8rem}
+/* UPLOAD PANEL */
+.upload-panel{background:var(--navy);padding:2rem;border-bottom:2px solid rgba(201,168,76,.2)}
+.upload-inner{max-width:960px;margin:0 auto}
+.upload-title{font-family:'Playfair Display',serif;color:white;font-size:1.5rem;margin-bottom:.3rem}
+.upload-title em{color:var(--gold);font-style:normal}
+.upload-sub{color:rgba(255,255,255,.5);font-size:.82rem;margin-bottom:1.2rem;line-height:1.6}
+.upload-sub a{color:var(--gold-light)}
 
-/* SEARCH PANEL */
-.search-panel{background:rgba(255,255,255,.06);border:1px solid rgba(201,168,76,.3);border-radius:6px;padding:1.5rem;backdrop-filter:blur(8px)}
-.sg{display:grid;grid-template-columns:1fr 1fr 130px 130px auto;gap:.75rem;align-items:end}
-@media(max-width:800px){.sg{grid-template-columns:1fr 1fr}.btn-run{grid-column:span 2}}
-.field label{display:block;font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-light);margin-bottom:.35rem;font-family:'Source Code Pro',monospace}
-.field input,.field select{width:100%;background:rgba(255,255,255,.08);border:1px solid rgba(201,168,76,.35);border-radius:4px;padding:.6rem .85rem;color:white;font-family:'Inter',sans-serif;font-size:.88rem;outline:none;transition:border-color .2s,background .2s}
-.field input::placeholder{color:rgba(255,255,255,.3)}
-.field input:focus,.field select:focus{border-color:var(--gold);background:rgba(255,255,255,.12)}
-.field select option{background:var(--navy);color:white}
-.btn-run{background:var(--gold);color:var(--navy);border:none;border-radius:4px;padding:.65rem 1.4rem;font-family:'Source Code Pro',monospace;font-size:.82rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;white-space:nowrap;transition:background .2s,transform .1s;display:flex;align-items:center;gap:.5rem;height:40px}
-.btn-run:hover{background:var(--gold-light);transform:translateY(-1px)}
-.btn-run:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.how-to{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem;margin-bottom:1.4rem}
+@media(max-width:680px){.how-to{grid-template-columns:1fr 1fr}}
+.ht-step{background:rgba(255,255,255,.06);border:1px solid rgba(201,168,76,.2);border-radius:5px;padding:.9rem 1rem}
+.ht-n{font-family:'Source Code Pro',monospace;font-size:.6rem;color:var(--gold);font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.3rem}
+.ht-t{color:white;font-size:.8rem;font-weight:600;margin-bottom:.2rem}
+.ht-d{color:rgba(255,255,255,.4);font-size:.72rem;line-height:1.4}
 
-/* MAIN */
-main{max-width:1280px;margin:0 auto;padding:1.5rem 1.5rem 4rem}
+.upload-row{display:flex;gap:.8rem;align-items:center;flex-wrap:wrap}
+.upload-drop{position:relative;flex:1;min-width:200px}
+.upload-drop input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.upload-btn-label{display:flex;align-items:center;gap:.6rem;background:var(--gold);color:var(--navy);border:none;border-radius:4px;padding:.65rem 1.4rem;font-family:'Source Code Pro',monospace;font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;white-space:nowrap;width:100%;justify-content:center}
+.upload-btn-label:hover{background:var(--gold-light)}
+.status-pill{font-family:'Source Code Pro',monospace;font-size:.7rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:.5rem}
+.spill-dot{width:8px;height:8px;border-radius:50%;background:#555;flex-shrink:0}
+.spill-dot.green{background:var(--green);box-shadow:0 0 5px rgba(39,174,96,.5)}
+.spill-dot.gold{background:var(--gold);animation:pulse .8s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 
-/* STATUS */
-.status{display:flex;align-items:center;gap:1rem;padding:.85rem 1.2rem;background:white;border:1px solid var(--border);border-radius:6px;margin-bottom:1.2rem;font-family:'Source Code Pro',monospace;font-size:.75rem;color:var(--mid)}
-.sdot{width:9px;height:9px;border-radius:50%;background:#ccc;flex-shrink:0}
-.sdot.live{background:var(--green);box-shadow:0 0 6px rgba(39,174,96,.5);animation:pulse 1.5s infinite}
-.sdot.loading{background:var(--gold);animation:pulse .8s infinite}
-.sdot.warn{background:#e67e22}
-.sdot.error{background:var(--red)}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.smsg{flex:1}
-.stime{color:rgba(0,0,0,.3);font-size:.68rem}
+/* SEARCH BAR */
+.search-bar{background:white;border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;gap:.8rem;align-items:center;flex-wrap:wrap}
+.search-bar input,.search-bar select{border:1px solid var(--border);border-radius:4px;padding:.5rem .8rem;font-size:.85rem;color:#2C2C2C;background:white;outline:none;font-family:'Inter',sans-serif}
+.search-bar input:focus,.search-bar select:focus{border-color:var(--gold)}
+#iName{width:220px}
+#iDonor{width:180px}
+#iMin{width:90px}
+.btn-search{background:var(--navy);color:white;border:none;border-radius:4px;padding:.52rem 1.2rem;font-family:'Source Code Pro',monospace;font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+.btn-search:hover{background:#243656}
+.slabel{font-size:.72rem;color:var(--mid);white-space:nowrap}
 
 /* STATS */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.2rem;display:none}
-@media(max-width:680px){.stats{grid-template-columns:repeat(2,1fr)}}
-.scard{background:white;border:1px solid var(--border);border-radius:6px;padding:1.1rem 1.3rem;position:relative;overflow:hidden}
+.stats{display:none;grid-template-columns:repeat(4,1fr);gap:1rem;padding:1.2rem 2rem;background:var(--stripe);border-bottom:1px solid var(--border)}
+@media(max-width:680px){.stats{grid-template-columns:1fr 1fr}}
+.scard{background:white;border:1px solid var(--border);border-radius:5px;padding:1rem 1.2rem;position:relative;overflow:hidden}
 .scard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold)}
-.slabel{font-family:'Source Code Pro',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);margin-bottom:.35rem}
-.sval{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:700;color:var(--navy);line-height:1}
-.ssub{font-size:.72rem;color:var(--mid);margin-top:.2rem}
+.slbl{font-family:'Source Code Pro',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);margin-bottom:.3rem}
+.sval{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--navy);line-height:1}
+.ssub{font-size:.7rem;color:var(--mid);margin-top:.2rem}
 
 /* AI BOX */
-.aibox{background:linear-gradient(135deg,#fff9ec,#fff);border:1px solid var(--border);border-left:4px solid var(--gold);border-radius:6px;padding:1.3rem 1.5rem;margin-bottom:1.2rem;display:none}
+.aibox{display:none;margin:1rem 2rem;background:linear-gradient(135deg,#fff9ec,#fff);border:1px solid var(--border);border-left:4px solid var(--gold);border-radius:6px;padding:1.2rem 1.5rem}
 .aibox.on{display:block}
-.aihdr{display:flex;align-items:center;gap:.6rem;font-family:'Source Code Pro',monospace;font-size:.67rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem}
-.aibody{font-size:.9rem;line-height:1.7;color:var(--charcoal);white-space:pre-wrap}
+.aihdr{font-family:'Source Code Pro',monospace;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem}
+.aibody{font-size:.88rem;line-height:1.7;white-space:pre-wrap}
 
-/* TABLE SECTION */
-.tsec{background:white;border:1px solid var(--border);border-radius:8px;overflow:hidden}
-.thdr{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.5rem;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:.7rem}
-.ttitle{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--navy)}
-.tbtns{display:flex;gap:.5rem;align-items:center}
-.tbtn{background:white;border:1px solid var(--border);border-radius:4px;padding:.45rem .9rem;font-family:'Source Code Pro',monospace;font-size:.68rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;color:var(--navy);transition:all .15s}
-.tbtn:hover{background:var(--cream);border-color:var(--gold);color:var(--gold)}
-.fbar{padding:.7rem 1.5rem;border-bottom:1px solid var(--stripe);display:flex;gap:.7rem;align-items:center;flex-wrap:wrap;background:var(--stripe);display:none}
-.fbar input{border:1px solid var(--border);border-radius:4px;padding:.38rem .75rem;font-size:.8rem;color:var(--charcoal);background:white;outline:none;width:210px}
+/* TABLE */
+.tsec{margin:0}
+.thdr{display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:.6rem}
+.ttitle{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--navy)}
+.tbtns{display:flex;gap:.5rem}
+.tbtn{background:white;border:1px solid var(--border);border-radius:4px;padding:.4rem .85rem;font-family:'Source Code Pro',monospace;font-size:.65rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;color:var(--navy);transition:all .15s}
+.tbtn:hover{border-color:var(--gold);color:var(--gold)}
+.fbar{display:none;padding:.6rem 2rem;background:var(--stripe);border-bottom:1px solid var(--border);gap:.7rem;align-items:center;flex-wrap:wrap}
+.fbar.on{display:flex}
+.fbar input{border:1px solid var(--border);border-radius:4px;padding:.35rem .7rem;font-size:.78rem;outline:none;width:200px}
 .fbar input:focus{border-color:var(--gold)}
-.fbar label{font-size:.73rem;color:var(--mid);display:flex;align-items:center;gap:.3rem;cursor:pointer}
-.fcount{margin-left:auto;font-size:.73rem;color:var(--mid);font-family:'Source Code Pro',monospace}
+.fbar label{font-size:.72rem;color:var(--mid);display:flex;align-items:center;gap:.3rem;cursor:pointer}
+.fcount{margin-left:auto;font-family:'Source Code Pro',monospace;font-size:.7rem;color:var(--mid)}
 .twrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:.8rem}
-thead th{background:var(--navy);color:rgba(255,255,255,.85);font-family:'Source Code Pro',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:.7rem 1rem;text-align:left;white-space:nowrap;cursor:pointer;user-select:none;position:sticky;top:0}
-thead th:hover{background:#243558;color:var(--gold)}
+table{width:100%;border-collapse:collapse;font-size:.79rem}
+thead th{background:var(--navy);color:rgba(255,255,255,.85);font-family:'Source Code Pro',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:.65rem 1rem;text-align:left;white-space:nowrap;cursor:pointer;user-select:none}
+thead th:hover{background:#243658;color:var(--gold)}
 thead th.sorted{color:var(--gold)}
-tbody tr{border-bottom:1px solid var(--stripe);transition:background .1s}
+tbody tr{border-bottom:1px solid var(--stripe)}
 tbody tr:hover{background:#fdf8f0}
-tbody td{padding:.65rem 1rem;vertical-align:top}
+tbody td{padding:.62rem 1rem;vertical-align:top}
 .tn{font-weight:600}
+.tm{color:var(--mid);font-size:.74rem}
 .ta{font-family:'Source Code Pro',monospace;font-weight:600;color:var(--navy);white-space:nowrap}
 .ta.big{color:var(--red)}
-.tm{color:var(--mid);font-size:.75rem}
-.td{font-family:'Source Code Pro',monospace;font-size:.75rem;color:var(--mid);white-space:nowrap}
-.org{display:inline-block;padding:1px 6px;border-radius:2px;font-size:.6rem;font-weight:700;font-family:'Source Code Pro',monospace;background:#f0f0f0;color:#666;margin-left:4px}
-.empty{padding:3.5rem 2rem;text-align:center;color:var(--mid)}
-.eicon{font-size:2.5rem;margin-bottom:.8rem;opacity:.35}
-.etitle{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--navy);margin-bottom:.4rem}
-.esub{font-size:.85rem;line-height:1.6;max-width:360px;margin:0 auto}
-.skel td{background:linear-gradient(90deg,#f0f0f0 25%,#e8e8e8 50%,#f0f0f0 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;color:transparent!important;border-radius:3px}
-@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
-.pager{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.5rem;border-top:1px solid var(--border);font-size:.78rem;color:var(--mid);flex-wrap:wrap;gap:.7rem;display:none}
+.tdate{font-family:'Source Code Pro',monospace;font-size:.73rem;color:var(--mid);white-space:nowrap}
+.org-badge{display:inline-block;padding:1px 5px;border-radius:2px;font-size:.58rem;font-weight:700;font-family:'Source Code Pro',monospace;background:#f0f0f0;color:#666;margin-left:3px}
+.empty{padding:4rem 2rem;text-align:center;color:var(--mid)}
+.eico{font-size:2.5rem;margin-bottom:.8rem;opacity:.3}
+.etitle{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--navy);margin-bottom:.4rem}
+.esub{font-size:.83rem;line-height:1.6;max-width:380px;margin:0 auto}
+.skel td{background:linear-gradient(90deg,#f0f0f0 25%,#e8e8e8 50%,#f0f0f0 75%);background-size:200% 100%;animation:shim 1.4s infinite;color:transparent!important;border-radius:2px}
+@keyframes shim{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.pager{display:none;align-items:center;justify-content:space-between;padding:.85rem 2rem;border-top:1px solid var(--border);font-size:.77rem;color:var(--mid);flex-wrap:wrap;gap:.6rem}
+.pager.on{display:flex}
 .pbtns{display:flex;gap:.35rem}
-.pbtn{width:30px;height:30px;border:1px solid var(--border);background:white;border-radius:3px;cursor:pointer;font-size:.75rem;color:var(--mid);display:flex;align-items:center;justify-content:center;font-family:'Source Code Pro',monospace;transition:all .15s}
+.pbtn{width:30px;height:30px;border:1px solid var(--border);background:white;border-radius:3px;cursor:pointer;font-size:.74rem;font-family:'Source Code Pro',monospace;color:var(--mid);display:flex;align-items:center;justify-content:center;transition:all .15s}
 .pbtn:hover,.pbtn.active{background:var(--navy);color:white;border-color:var(--navy)}
 
-/* MODAL */
-.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:999;align-items:center;justify-content:center;backdrop-filter:blur(2px)}
-.overlay.open{display:flex}
-.modal{background:white;border-radius:8px;padding:2rem;max-width:580px;width:90%;border-top:4px solid var(--gold);max-height:80vh;overflow-y:auto}
-.modal h2{font-family:'Playfair Display',serif;color:var(--navy);margin-bottom:1rem;font-size:1.2rem}
-.modal p,.modal li{font-size:.86rem;line-height:1.7;color:var(--mid);margin-bottom:.6rem}
-.modal ul{padding-left:1.3rem}
-.mclose{float:right;background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--mid);margin-top:-.4rem}
-
-footer{background:var(--navy);color:rgba(255,255,255,.3);text-align:center;padding:1.2rem;font-family:'Source Code Pro',monospace;font-size:.68rem;line-height:2;border-top:3px solid var(--gold)}
+footer{background:var(--navy);color:rgba(255,255,255,.3);text-align:center;padding:1.2rem;font-family:'Source Code Pro',monospace;font-size:.65rem;line-height:2;border-top:3px solid var(--gold)}
 footer a{color:var(--gold);text-decoration:none}
 </style>
 </head>
@@ -124,418 +114,439 @@ footer a{color:var(--gold);text-decoration:none}
 
 <header>
   <div class="hbadge">NC Judicial Donor Intelligence</div>
-  <div class="hmeta">Campaign Finance Tracker<br>Source: <strong>NCSBE Public Database</strong> · Updated Nightly</div>
+  <div class="hmeta">Source: <strong>NCSBE</strong> · Data uploaded by user · Updated on demand</div>
 </header>
 
-<div class="hero">
-  <h1>NC Judicial Donor<br><em>Intelligence Dashboard</em></h1>
-  <p>Search NC State Board of Elections campaign finance records for $1,000+ contributors to any NC judicial candidate. Live data — reusable for any judge name.</p>
-  <div class="search-panel">
-    <div class="sg">
-      <div class="field">
-        <label>Candidate / Judge Name</label>
-        <input type="text" id="iName" placeholder="e.g. Dietz, Riggs, Inman…" autocomplete="off">
+<!-- UPLOAD PANEL -->
+<div class="upload-panel">
+  <div class="upload-inner">
+    <div class="upload-title">NC Judicial Donor <em>Intelligence Dashboard</em></div>
+    <div class="upload-sub">
+      Download donor data from NCSBE for any judge, upload once, search forever.
+      Data is stored persistently — click <strong>Update Data</strong> any time a new filing period drops.
+    </div>
+
+    <div class="how-to">
+      <div class="ht-step">
+        <div class="ht-n">Step 1</div>
+        <div class="ht-t">Go to NCSBE</div>
+        <div class="ht-d"><a href="https://cf.ncsbe.gov/CFTxnLkup/" target="_blank" style="color:var(--gold-light)">cf.ncsbe.gov/CFTxnLkup</a></div>
       </div>
-      <div class="field">
-        <label>Donor Name (optional)</label>
-        <input type="text" id="iDonor" placeholder="Filter by donor…" autocomplete="off">
+      <div class="ht-step">
+        <div class="ht-n">Step 2</div>
+        <div class="ht-t">Search</div>
+        <div class="ht-d">Enter judge name in Committee field. Type: Receipts. Amount From: leave blank for all.</div>
       </div>
-      <div class="field">
-        <label>Min Amount ($)</label>
-        <input type="number" id="iMin" value="1000" min="0" step="100">
+      <div class="ht-step">
+        <div class="ht-n">Step 3</div>
+        <div class="ht-t">Export CSV</div>
+        <div class="ht-d">On results page click "Export data to .CSV"</div>
       </div>
-      <div class="field">
-        <label>Year Range</label>
-        <select id="iYear">
-          <option value="">All Years</option>
-          <option value="2024">2024</option>
-          <option value="2022">2022</option>
-          <option value="2020">2020</option>
-          <option value="2018">2018</option>
-          <option value="2016">2016</option>
-        </select>
+      <div class="ht-step">
+        <div class="ht-n">Step 4</div>
+        <div class="ht-t">Upload Here</div>
+        <div class="ht-d">Click Update Data below. Data is stored — only redo when filings change.</div>
       </div>
-      <div class="field">
-        <button class="btn-run" id="btnRun" onclick="runSearch()">
-          <span id="btnIcon">⚖</span> Run Report
-        </button>
+    </div>
+
+    <div class="upload-row">
+      <div class="upload-drop">
+        <input type="file" id="fileInput" accept=".csv" onchange="handleFile(this)">
+        <div class="upload-btn-label">📂 Update Data — Upload CSV</div>
+      </div>
+      <div class="status-pill">
+        <div class="spill-dot" id="uploadDot"></div>
+        <span id="uploadMsg">Checking for stored data…</span>
       </div>
     </div>
   </div>
 </div>
 
-<main>
-  <div class="status" id="status">
-    <div class="sdot" id="sdot"></div>
-    <div class="smsg" id="smsg">Enter a judge or candidate name above and click <strong>Run Report</strong>.</div>
-    <div class="stime" id="stime"></div>
-  </div>
+<!-- SEARCH -->
+<div class="search-bar">
+  <span class="slabel">Judge / Candidate:</span>
+  <input type="text" id="iName" placeholder="e.g. Dietz, Riggs…" oninput="applyAll()">
+  <span class="slabel">Donor:</span>
+  <input type="text" id="iDonor" placeholder="Donor name…" oninput="applyAll()">
+  <span class="slabel">Min $:</span>
+  <input type="number" id="iMin" value="1000" min="0" oninput="applyAll()">
+  <span class="slabel">Year:</span>
+  <select id="iYear" onchange="applyAll()">
+    <option value="">All</option>
+    <option>2024</option><option>2022</option><option>2020</option><option>2018</option><option>2016</option>
+  </select>
+</div>
 
-  <div class="stats" id="stats">
-    <div class="scard"><div class="slabel">Donors Found</div><div class="sval" id="sDonors">—</div><div class="ssub">≥ min threshold</div></div>
-    <div class="scard"><div class="slabel">Total Raised</div><div class="sval" id="sTotal">—</div><div class="ssub">qualifying contributions</div></div>
-    <div class="scard"><div class="slabel">Avg Donation</div><div class="sval" id="sAvg">—</div><div class="ssub">per donor</div></div>
-    <div class="scard"><div class="slabel">Top Donor</div><div class="sval" id="sTopName" style="font-size:1rem;padding-top:.4rem">—</div><div class="ssub" id="sTopAmt"></div></div>
-  </div>
+<!-- STATS -->
+<div class="stats" id="stats">
+  <div class="scard"><div class="slbl">Donors</div><div class="sval" id="sDonors">—</div><div class="ssub">qualifying</div></div>
+  <div class="scard"><div class="slbl">Total Raised</div><div class="sval" id="sTotal">—</div><div class="ssub">filtered records</div></div>
+  <div class="scard"><div class="slbl">Avg Donation</div><div class="sval" id="sAvg">—</div><div class="ssub">per donor</div></div>
+  <div class="scard"><div class="slbl">Top Donor</div><div class="sval" id="sTopN" style="font-size:.95rem;padding-top:.35rem">—</div><div class="ssub" id="sTopA"></div></div>
+</div>
 
-  <div class="aibox" id="aibox">
-    <div class="aihdr">⚡ AI Donor Intelligence — Powered by Claude</div>
-    <div class="aibody" id="aitext">Analyzing…</div>
-  </div>
+<!-- AI -->
+<div class="aibox" id="aibox">
+  <div class="aihdr">⚡ AI Donor Intelligence — Claude Analysis</div>
+  <div class="aibody" id="aitext"></div>
+</div>
 
-  <div class="tsec">
-    <div class="thdr">
-      <div class="ttitle" id="ttitle">Donor Records</div>
-      <div class="tbtns">
-        <button class="tbtn" onclick="showHelp()">ℹ About Data</button>
-        <button class="tbtn" id="btnCSV" onclick="exportCSV()" style="display:none">↓ CSV</button>
-        <button class="tbtn" id="btnPDF" onclick="exportPDF()" style="display:none">↓ PDF</button>
-      </div>
-    </div>
-    <div class="fbar" id="fbar">
-      <input type="text" id="fText" placeholder="Filter by name, city, employer…" oninput="applyFilter()">
-      <label><input type="checkbox" id="fHigh" onchange="applyFilter()"> $5k+ only</label>
-      <label><input type="checkbox" id="fOrg" onchange="applyFilter()"> Orgs only</label>
-      <span class="fcount" id="fcount"></span>
-    </div>
-    <div class="twrap">
-      <table>
-        <thead><tr>
-          <th onclick="sort('name')">Donor Name <span id="s-name"></span></th>
-          <th onclick="sort('addr')">Address</th>
-          <th onclick="sort('city')">City / State</th>
-          <th onclick="sort('employer')">Employer</th>
-          <th onclick="sort('occupation')">Occupation</th>
-          <th onclick="sort('amount')">Amount <span id="s-amount">↓</span></th>
-          <th onclick="sort('date')">Date</th>
-          <th>Committee</th>
-        </tr></thead>
-        <tbody id="tbody">
-          <tr><td colspan="8"><div class="empty"><div class="eicon">⚖️</div><div class="etitle">Ready to Search</div><div class="esub">Enter a judicial candidate's name and click Run Report to query NCSBE live data.</div></div></td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="pager" id="pager">
-      <div id="pinfo"></div>
-      <div class="pbtns" id="pbtns"></div>
+<!-- TABLE -->
+<div class="tsec">
+  <div class="thdr">
+    <div class="ttitle" id="ttitle">Donor Records</div>
+    <div class="tbtns">
+      <button class="tbtn" onclick="showHelp()">ℹ How to Get Data</button>
+      <button class="tbtn" id="btnCSV" onclick="exportCSV()" style="display:none">↓ CSV</button>
+      <button class="tbtn" id="btnPDF" onclick="exportPDF()" style="display:none">↓ PDF</button>
     </div>
   </div>
-</main>
+  <div class="fbar" id="fbar">
+    <input type="text" id="fText" placeholder="Filter by name, city, employer…" oninput="applyAll()">
+    <label><input type="checkbox" id="fHigh" onchange="applyAll()"> $5k+</label>
+    <label><input type="checkbox" id="fOrg" onchange="applyAll()"> Orgs only</label>
+    <span class="fcount" id="fcount"></span>
+  </div>
+  <div class="twrap">
+    <table>
+      <thead><tr>
+        <th onclick="doSort('name')">Donor Name</th>
+        <th onclick="doSort('addr')">Address</th>
+        <th onclick="doSort('city')">City / State</th>
+        <th onclick="doSort('employer')">Employer</th>
+        <th onclick="doSort('occupation')">Occupation</th>
+        <th onclick="doSort('amount')">Amount ↓</th>
+        <th onclick="doSort('date')">Date</th>
+        <th>Committee</th>
+      </tr></thead>
+      <tbody id="tbody">
+        <tr><td colspan="8"><div class="empty">
+          <div class="eico">📂</div>
+          <div class="etitle">No data loaded</div>
+          <div class="esub">Follow the 4 steps above to download your first CSV from NCSBE and upload it here. Takes about 60 seconds.</div>
+        </div></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="pager" id="pager">
+    <div id="pinfo"></div>
+    <div class="pbtns" id="pbtns"></div>
+  </div>
+</div>
 
-<div class="overlay" id="helpModal" onclick="if(event.target===this)closeHelp()">
-  <div class="modal">
-    <button class="mclose" onclick="closeHelp()">×</button>
-    <h2>About This Dashboard</h2>
-    <p><strong>Data Source:</strong> NC State Board of Elections public campaign finance database at cf.ncsbe.gov, updated each business night.</p>
-    <p><strong>How to Search:</strong></p>
-    <ul>
-      <li>Enter any NC judicial candidate's last name (e.g. "Dietz", "Riggs")</li>
-      <li>The tool finds their campaign committee(s) then pulls all contribution receipts</li>
-      <li>Default filter: $1,000+ donations. Adjust the Min Amount field as needed</li>
-      <li>Use the inline filter bar to narrow by donor name, city, or employer</li>
-      <li>Export to CSV for Excel analysis or PDF for print reports</li>
-    </ul>
-    <p><strong>Limitations:</strong> NCSBE records go back to 1989 but many older/county reports are paper-only and not in the searchable database. When live data isn't available, the dashboard shows representative sample data.</p>
-    <p><strong>Legal Note:</strong> All data is public record per N.C.G.S. § 163-278.11. For research/due diligence only. Not legal advice.</p>
+<!-- HELP MODAL -->
+<div id="helpModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:999;align-items:center;justify-content:center" onclick="if(event.target===this)this.style.display='none'">
+  <div style="background:white;border-radius:8px;padding:2rem;max-width:540px;width:90%;border-top:4px solid var(--gold);max-height:80vh;overflow-y:auto">
+    <button onclick="document.getElementById('helpModal').style.display='none'" style="float:right;background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--mid)">×</button>
+    <h2 style="font-family:'Playfair Display',serif;color:var(--navy);margin-bottom:1rem">How to Get Your Data</h2>
+    <p style="font-size:.86rem;line-height:1.7;color:var(--mid);margin-bottom:.8rem"><strong>1.</strong> Go to <a href="https://cf.ncsbe.gov/CFTxnLkup/" target="_blank" style="color:var(--gold)">cf.ncsbe.gov/CFTxnLkup</a></p>
+    <p style="font-size:.86rem;line-height:1.7;color:var(--mid);margin-bottom:.8rem"><strong>2.</strong> In the <strong>Committee</strong> field, type the judge's name. Set <strong>Type</strong> to Receipts. Leave Amount blank to get all donors.</p>
+    <p style="font-size:.86rem;line-height:1.7;color:var(--mid);margin-bottom:.8rem"><strong>3.</strong> Click Search. On the results page, click <strong>"Export data to .CSV"</strong>.</p>
+    <p style="font-size:.86rem;line-height:1.7;color:var(--mid);margin-bottom:.8rem"><strong>4.</strong> Come back here, click <strong>Update Data</strong>, and upload that file. Done.</p>
+    <p style="font-size:.86rem;line-height:1.7;color:var(--mid)"><strong>When to update:</strong> NCSBE updates overnight. New filing periods are: Jan, Apr, Jul, Oct, and pre/post election. Upload a fresh CSV after each one.</p>
+    <p style="font-size:.8rem;color:#999;margin-top:1rem">All data is public record per N.C.G.S. § 163-278.11</p>
   </div>
 </div>
 
 <footer>
-  NC Judicial Donor Intelligence Dashboard · Data: <a href="https://cf.ncsbe.gov/CFTxnLkup/" target="_blank">NCSBE Public Campaign Finance Database</a><br>
-  All data is public record per N.C.G.S. § 163-278.11 · For legal/research use only · Not legal advice
+  NC Judicial Donor Intelligence · Data source: <a href="https://cf.ncsbe.gov/CFTxnLkup/" target="_blank">NCSBE Public Campaign Finance Database</a><br>
+  All data public record per N.C.G.S. § 163-278.11 · For research use only · Not legal advice
 </footer>
 
 <script>
-// ─── State ────────────────────────────────────────────────────────────────
+// ── State ─────────────────────────────────────────────────────────────
 let ALL = [], FILTERED = [], page = 1, sortField = 'amount', sortDir = 'desc';
 const PAGE = 25;
 
-// ─── Demo data (always available as fallback) ─────────────────────────────
-function demoData(label, min) {
-  const rows = [
-    {name:'Holding, Robert F.',addr:'4501 Six Forks Rd',city:'Raleigh',state:'NC',zip:'27609',employer:'First Citizens BancShares',occupation:'Executive',amount:25000,date:'2024-02-14',isOrg:false},
-    {name:'NC Bar Association PAC',addr:'PO Box 3688',city:'Cary',state:'NC',zip:'27519',employer:'',occupation:'Political Committee',amount:10000,date:'2024-01-22',isOrg:true},
-    {name:'Williams, James T.',addr:'1200 Front St Ste 400',city:'Raleigh',state:'NC',zip:'27601',employer:'Williams Mullen',occupation:'Attorney',amount:8500,date:'2024-03-05',isOrg:false},
-    {name:'Lawyers for Justice PAC',addr:'PO Box 12345',city:'Durham',state:'NC',zip:'27701',employer:'',occupation:'Political Committee',amount:7500,date:'2023-11-15',isOrg:true},
-    {name:'Henderson, Patricia M.',addr:'2001 Weston Pkwy',city:'Cary',state:'NC',zip:'27513',employer:'Duke Energy',occupation:'VP Government Relations',amount:5000,date:'2024-01-30',isOrg:false},
-    {name:'Parker, David L.',addr:'300 N Greene St Ste 2100',city:'Greensboro',state:'NC',zip:'27401',employer:'Parker Poe Adams & Bernstein',occupation:'Attorney',amount:5000,date:'2024-02-19',isOrg:false},
-    {name:'Business PAC of NC',addr:'PO Box 2508',city:'Raleigh',state:'NC',zip:'27602',employer:'',occupation:'Political Action Committee',amount:5000,date:'2023-10-08',isOrg:true},
-    {name:'Thompson, George R.',addr:'400 Meadowmont Village Cir',city:'Chapel Hill',state:'NC',zip:'27517',employer:'UNC-Chapel Hill',occupation:'Professor of Law',amount:4500,date:'2024-01-14',isOrg:false},
-    {name:'Anderson, Susan K.',addr:'8800 Strickland Rd Ste 114',city:'Raleigh',state:'NC',zip:'27615',employer:'Smith Anderson Blount',occupation:'Attorney',amount:4000,date:'2024-03-18',isOrg:false},
-    {name:'Mitchell, Carl B.',addr:'3600 Glenwood Ave',city:'Raleigh',state:'NC',zip:'27612',employer:'Poyner Spruill LLP',occupation:'Partner',amount:3500,date:'2024-02-28',isOrg:false},
-    {name:'Reynolds, Anne L.',addr:'501 Eastowne Dr',city:'Chapel Hill',state:'NC',zip:'27514',employer:'UNC Health Care',occupation:'Physician',amount:3000,date:'2023-12-12',isOrg:false},
-    {name:'Harris, Malcolm T.',addr:'600 Vine St',city:'Charlotte',state:'NC',zip:'28202',employer:'Bank of America Corp',occupation:'Managing Director',amount:3000,date:'2024-01-08',isOrg:false},
-    {name:'Progressive Judiciary Fund',addr:'PO Box 17100',city:'Raleigh',state:'NC',zip:'27619',employer:'',occupation:'Political Committee',amount:2500,date:'2024-03-22',isOrg:true},
-    {name:'Cooper, Linda S.',addr:'1 Exchange Plaza',city:'Raleigh',state:'NC',zip:'27601',employer:'Kilpatrick Townsend',occupation:'Attorney',amount:2500,date:'2024-02-07',isOrg:false},
-    {name:'Moore, Edward J.',addr:'114 W Edenton St',city:'Raleigh',state:'NC',zip:'27603',employer:'Moore & Van Allen',occupation:'Senior Partner',amount:2500,date:'2023-11-30',isOrg:false},
-    {name:'Carter, Beverly A.',addr:'4421 Stuart Andrew Blvd',city:'Charlotte',state:'NC',zip:'27236',employer:'Duke University Hospital',occupation:'Administrator',amount:2000,date:'2024-01-25',isOrg:false},
-    {name:'NC Association of Defense Attorneys',addr:'PO Box 1993',city:'Raleigh',state:'NC',zip:'27602',employer:'',occupation:'Bar Association',amount:2000,date:'2023-10-18',isOrg:true},
-    {name:'Jacobs, Richard N.',addr:'2000 Regency Pkwy',city:'Cary',state:'NC',zip:'27518',employer:'Centerline Capital Group',occupation:'Principal',amount:2000,date:'2024-03-10',isOrg:false},
-    {name:'Davis, Gloria M.',addr:'3700 Computer Dr',city:'Raleigh',state:'NC',zip:'27609',employer:'Cisco Systems',occupation:'VP Legal Affairs',amount:1750,date:'2024-02-22',isOrg:false},
-    {name:'Wilson, Thomas P.',addr:'209 Fayetteville St',city:'Raleigh',state:'NC',zip:'27601',employer:'Nexsen Pruet LLC',occupation:'Attorney',amount:1500,date:'2024-01-17',isOrg:false},
-    {name:'Johnson, Mary E.',addr:'5555 Six Forks Rd',city:'Raleigh',state:'NC',zip:'27609',employer:'Retired',occupation:'Retired Judge',amount:1500,date:'2024-03-01',isOrg:false},
-    {name:'Chambers, Kirk W.',addr:'800 Green Valley Rd',city:'Greensboro',state:'NC',zip:'27408',employer:'Greensboro News & Record',occupation:'Publisher',amount:1250,date:'2023-12-20',isOrg:false},
-    {name:'Scott, Frances D.',addr:'2801 Blue Ridge Rd',city:'Raleigh',state:'NC',zip:'27607',employer:'WakeMed Health System',occupation:'Chief Medical Officer',amount:1250,date:'2024-02-13',isOrg:false},
-    {name:'Lewis, Nathan C.',addr:'3901 Barrett Dr',city:'Raleigh',state:'NC',zip:'27609',employer:'NC Farm Bureau',occupation:'Director Gov Affairs',amount:1000,date:'2024-01-31',isOrg:false},
-    {name:'Jenkins, Carolyn J.',addr:'100 Europa Dr',city:'Chapel Hill',state:'NC',zip:'27517',employer:'GlaxoSmithKline',occupation:'Senior Director',amount:1000,date:'2024-03-14',isOrg:false}
-  ].filter(r => r.amount >= (min || 1000));
-  return rows.map(r => ({...r, committee: label || 'Sample Committee'}));
-}
-
-// ─── Main search ──────────────────────────────────────────────────────────
-async function runSearch() {
-  const name = document.getElementById('iName').value.trim();
-  if (!name) { setStatus('error','⚠ Please enter a candidate name.'); return; }
-
-  const min = parseFloat(document.getElementById('iMin').value) || 1000;
-  const year = document.getElementById('iYear').value;
-  const donor = document.getElementById('iDonor').value.trim();
-
-  setBusy(true);
-  setStatus('loading', `Searching NCSBE for "${name}"…`);
-  showSkel();
-
-  let records = [];
-  let live = false;
-  let committeeCount = 0;
-
+// ── On load: check for stored data ────────────────────────────────────
+window.addEventListener('load', async () => {
+  setUploadStatus('gold', 'Checking stored data…');
   try {
-    // 1. Find committees
-    setStatus('loading', `Finding committees for "${name}"…`);
-    const cRes = await callProxy('committees', { name });
-    const committees = cRes?.committees || [];
-    committeeCount = committees.length;
-
-    if (committees.length > 0) {
-      // 2. Fetch transactions for each committee
-      setStatus('loading', `Found ${committees.length} committee(s). Fetching donations…`);
-      for (const c of committees) {
-        const tRes = await callProxy('transactions', { committeeName: c.name, sid: c.sid || '', minAmount: min, year, donorName: donor });
-        const txns = (tRes?.transactions || []).map(t => ({...t, committee: c.name}));
-        records = records.concat(txns);
-      }
-      if (records.length > 0) live = true;
+    const r = await fetch('/api/data');
+    const d = await r.json();
+    if (d.ok && d.csv) {
+      parseAndLoad(d.csv);
+      const when = d.uploadedAt ? new Date(d.uploadedAt).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) : 'previously';
+      setUploadStatus('green', `Data loaded — uploaded ${when}. Click "Update Data" to refresh.`);
+    } else {
+      setUploadStatus('', 'No data yet. Follow the 4 steps above to upload your first CSV.');
     }
   } catch(e) {
-    console.warn('NCSBE fetch error:', e.message);
+    setUploadStatus('', 'Upload a CSV to get started.');
+  }
+});
+
+// ── File handler ──────────────────────────────────────────────────────
+async function handleFile(input) {
+  const file = input.files[0];
+  if (!file) return;
+  setUploadStatus('gold', `Uploading ${file.name}…`);
+  const text = await file.text();
+  try {
+    const r = await fetch('/api/data', { method: 'POST', body: text, headers: { 'Content-Type': 'text/plain' } });
+    const d = await r.json();
+    if (d.ok) {
+      parseAndLoad(text);
+      setUploadStatus('green', `✓ ${file.name} uploaded & stored. ${ALL.length} records loaded.`);
+    } else throw new Error(d.error || 'upload failed');
+  } catch(e) {
+    setUploadStatus('', `Upload failed: ${e.message}`);
+  }
+}
+
+// ── CSV Parser ────────────────────────────────────────────────────────
+// NCSBE CFTxnLkup export columns:
+// Date | Committee Name | Name | Address | City | State | Zip | Employer | Profession | Amount | Form Type | Receipt Type
+function parseAndLoad(csv) {
+  const lines = csv.split('\n').map(l => l.trim()).filter(Boolean);
+  if (lines.length < 2) { alert('CSV appears empty or invalid.'); return; }
+
+  // Find header row
+  let headerIdx = lines.findIndex(l => /date/i.test(l) && /amount/i.test(l));
+  if (headerIdx < 0) headerIdx = 0;
+
+  const headers = parseCSVLine(lines[headerIdx]).map(h => h.toLowerCase().replace(/[^a-z0-9]/g,''));
+  
+  // Map column indices flexibly
+  const col = (names) => {
+    for (const n of names) {
+      const i = headers.findIndex(h => h.includes(n));
+      if (i >= 0) return i;
+    }
+    return -1;
+  };
+
+  const iDate = col(['date']);
+  const iCommittee = col(['committee','committeename']);
+  const iName = col(['name','donorname','contributorname']);
+  const iAddr = col(['address','street','addr']);
+  const iCity = col(['city']);
+  const iState = col(['state']);
+  const iZip = col(['zip','postal']);
+  const iEmployer = col(['employer','employersname','employername']);
+  const iOccup = col(['profession','occupation']);
+  const iAmount = col(['amount']);
+
+  const records = [];
+  for (let i = headerIdx + 1; i < lines.length; i++) {
+    const cols = parseCSVLine(lines[i]);
+    if (cols.length < 4) continue;
+    const amtRaw = iAmount >= 0 ? cols[iAmount] : cols[cols.length - 1];
+    const amount = parseFloat((amtRaw || '').replace(/[$,]/g, ''));
+    if (isNaN(amount) || amount <= 0) continue;
+    const name = iName >= 0 ? cols[iName] : '';
+    if (!name || name.toLowerCase().includes('aggregated')) continue;
+
+    records.push({
+      date: iDate >= 0 ? cols[iDate] : '',
+      committee: iCommittee >= 0 ? cols[iCommittee] : '',
+      name,
+      addr: iAddr >= 0 ? cols[iAddr] : '',
+      city: iCity >= 0 ? cols[iCity] : '',
+      state: iState >= 0 ? cols[iState] : 'NC',
+      zip: iZip >= 0 ? (cols[iZip] || '').split('-')[0] : '',
+      employer: iEmployer >= 0 ? cols[iEmployer] : '',
+      occupation: iOccup >= 0 ? cols[iOccup] : '',
+      amount,
+      isOrg: /pac|committee|assoc|corp\b|inc\b|llc\b|llp\b|fund\b|union\b|league\b/i.test(name)
+    });
   }
 
-  // 3. Always fall back to demo if live returned nothing
-  if (records.length === 0) {
-    records = demoData(`Committee to Elect ${name}`, min);
-    live = false;
-  }
-
-  if (records.length === 0) {
-    setStatus('error', `No records found. Try lowering the minimum amount (currently $${min.toLocaleString()}).`);
-    showEmpty('No qualifying donations found', `Try setting the minimum to $500 or lower, or try the candidate's last name only.`);
-    setBusy(false);
-    return;
-  }
-
-  // 4. Render
-  ALL = records; FILTERED = [...ALL]; page = 1;
-  renderStats();
-  applyFilter();
-  document.getElementById('fbar').style.display = 'flex';
+  ALL = records.sort((a, b) => b.amount - a.amount);
+  applyAll();
+  document.getElementById('fbar').classList.add('on');
   document.getElementById('btnCSV').style.display = '';
   document.getElementById('btnPDF').style.display = '';
-  document.getElementById('stats').style.display = 'grid';
-  document.getElementById('ttitle').textContent = `${name} Donors — ${records.length} records`;
+}
 
-  if (live) {
-    setStatus('live', `✓ Live NCSBE data — ${records.length} donations from ${committeeCount} committee(s). Updated nightly.`, true);
-  } else {
-    setStatus('warn', `⚠ Sample data shown — NCSBE returned no digital records for "${name}". This candidate may have filed paper reports, or try a broader name search.`);
+function parseCSVLine(line) {
+  const r = []; let cur = '', inQ = false;
+  for (let i = 0; i < line.length; i++) {
+    const c = line[i];
+    if (c === '"') { if (inQ && line[i+1] === '"') { cur += '"'; i++; } else inQ = !inQ; }
+    else if (c === ',' && !inQ) { r.push(cur.trim()); cur = ''; }
+    else cur += c;
   }
-
-  setBusy(false);
-  runAI(name, records);
+  r.push(cur.trim()); return r;
 }
 
-// ─── Proxy caller ─────────────────────────────────────────────────────────
-async function callProxy(action, params) {
-  const qs = new URLSearchParams({ action, ...params });
-  const res = await fetch(`/.netlify/functions/ncsbe-proxy?${qs}`);
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return res.json();
-}
-
-// ─── Render ───────────────────────────────────────────────────────────────
-function applyFilter() {
+// ── Apply all filters + sort ──────────────────────────────────────────
+function applyAll() {
+  if (!ALL.length) return;
+  const name = (document.getElementById('iName').value || '').toLowerCase().trim();
+  const donor = (document.getElementById('iDonor').value || '').toLowerCase().trim();
+  const min = parseFloat(document.getElementById('iMin').value) || 0;
+  const year = document.getElementById('iYear').value;
   const txt = (document.getElementById('fText')?.value || '').toLowerCase();
   const high = document.getElementById('fHigh')?.checked;
   const org = document.getElementById('fOrg')?.checked;
+
   FILTERED = ALL.filter(r => {
+    if (name && !`${r.name} ${r.committee}`.toLowerCase().includes(name)) return false;
+    if (donor && !r.name.toLowerCase().includes(donor)) return false;
+    if (min && r.amount < min) return false;
+    if (year && !r.date.includes(year)) return false;
     if (txt && !`${r.name} ${r.city} ${r.employer} ${r.occupation} ${r.addr}`.toLowerCase().includes(txt)) return false;
     if (high && r.amount < 5000) return false;
     if (org && !r.isOrg) return false;
     return true;
   });
+
+  // sort
+  FILTERED.sort((a, b) => {
+    let va = a[sortField] || '', vb = b[sortField] || '';
+    if (sortField === 'amount') { va = +va; vb = +vb; }
+    const c = typeof va === 'number' ? va - vb : String(va).localeCompare(String(vb));
+    return sortDir === 'asc' ? c : -c;
+  });
+
   page = 1;
+  renderStats();
   renderPage();
+
+  const label = name || 'All Judges';
+  document.getElementById('ttitle').textContent = `${label} — ${FILTERED.length} donors`;
   document.getElementById('fcount').textContent = `${FILTERED.length} of ${ALL.length}`;
+  document.getElementById('stats').style.display = 'grid';
+
+  if (FILTERED.length > 0) runAI();
 }
 
+// ── Render page ───────────────────────────────────────────────────────
 function renderPage() {
-  const start = (page-1)*PAGE;
-  const slice = FILTERED.slice(start, start+PAGE);
+  const start = (page - 1) * PAGE;
+  const slice = FILTERED.slice(start, start + PAGE);
   const tbody = document.getElementById('tbody');
+
   if (!FILTERED.length) {
-    tbody.innerHTML = `<tr><td colspan="8"><div class="empty"><div class="eicon">🔍</div><div class="etitle">No matches</div><div class="esub">Clear the filter or adjust your criteria.</div></div></td></tr>`;
-    document.getElementById('pager').style.display = 'none'; return;
+    tbody.innerHTML = `<tr><td colspan="8"><div class="empty"><div class="eico">🔍</div><div class="etitle">No matching records</div><div class="esub">Adjust your search or filter criteria.</div></div></td></tr>`;
+    document.getElementById('pager').classList.remove('on'); return;
   }
+
   tbody.innerHTML = slice.map(r => `<tr>
-    <td class="tn">${esc(r.name)}${r.isOrg?'<span class="org">ORG</span>':''}</td>
-    <td class="tm">${esc(r.addr||'—')}</td>
-    <td class="tm">${esc(r.city||'—')}${r.state?', '+r.state:''}${r.zip?' '+r.zip:''}</td>
-    <td class="tm" style="max-width:170px">${esc(r.employer||'—')}</td>
-    <td class="tm" style="max-width:150px">${esc(r.occupation||'—')}</td>
-    <td class="ta${r.amount>=10000?' big':''}">${fmtMoney(r.amount)}</td>
-    <td class="td">${fmtDate(r.date)}</td>
-    <td class="tm" style="font-size:.72rem;max-width:150px">${esc(r.committee||'—')}</td>
+    <td class="tn">${esc(r.name)}${r.isOrg ? '<span class="org-badge">ORG</span>' : ''}</td>
+    <td class="tm">${esc(r.addr || '—')}</td>
+    <td class="tm">${esc(r.city || '—')}${r.state ? ', ' + r.state : ''}${r.zip ? ' ' + r.zip : ''}</td>
+    <td class="tm" style="max-width:160px">${esc(r.employer || '—')}</td>
+    <td class="tm" style="max-width:140px">${esc(r.occupation || '—')}</td>
+    <td class="ta${r.amount >= 10000 ? ' big' : ''}">${fmtM(r.amount)}</td>
+    <td class="tdate">${fmtD(r.date)}</td>
+    <td class="tm" style="font-size:.7rem;max-width:140px">${esc(r.committee || '—')}</td>
   </tr>`).join('');
+
   renderPager();
 }
 
+function renderStats() {
+  const tot = FILTERED.reduce((s, r) => s + r.amount, 0);
+  const avg = FILTERED.length ? tot / FILTERED.length : 0;
+  const top = FILTERED[0];
+  document.getElementById('sDonors').textContent = FILTERED.length.toLocaleString();
+  document.getElementById('sTotal').textContent = fmtM(tot);
+  document.getElementById('sAvg').textContent = fmtM(Math.round(avg));
+  document.getElementById('sTopN').textContent = top ? top.name.split(',')[0] : '—';
+  document.getElementById('sTopA').textContent = top ? fmtM(top.amount) : '';
+}
+
 function renderPager() {
-  const total = Math.ceil(FILTERED.length/PAGE);
-  const s = (page-1)*PAGE+1, e = Math.min(page*PAGE, FILTERED.length);
+  const total = Math.ceil(FILTERED.length / PAGE);
+  const s = (page - 1) * PAGE + 1, e = Math.min(page * PAGE, FILTERED.length);
   document.getElementById('pinfo').textContent = `Showing ${s}–${e} of ${FILTERED.length}`;
   const pb = document.getElementById('pbtns'); pb.innerHTML = '';
-  if (total<=1){document.getElementById('pager').style.display='none';return;}
-  document.getElementById('pager').style.display='flex';
-  const mk = (label,pg,active) => {
-    const b=document.createElement('button'); b.className='pbtn'+(active?' active':'');
-    b.textContent=label; if(!active) b.onclick=()=>{page=pg;renderPage();}; pb.appendChild(b);
+  if (total <= 1) { document.getElementById('pager').classList.remove('on'); return; }
+  document.getElementById('pager').classList.add('on');
+  const mk = (lbl, pg, active) => {
+    const b = document.createElement('button'); b.className = 'pbtn' + (active ? ' active' : '');
+    b.textContent = lbl; if (!active) b.onclick = () => { page = pg; renderPage(); }; pb.appendChild(b);
   };
-  if(page>1) mk('‹',page-1);
-  [...Array(total).keys()].map(i=>i+1).filter(p=>p===1||p===total||Math.abs(p-page)<=2).forEach((p,i,a)=>{
-    if(i&&p-a[i-1]>1){const s=document.createElement('span');s.textContent='…';s.style.cssText='padding:0 4px;color:var(--mid);font-size:.75rem;align-self:center';pb.appendChild(s);}
-    mk(p,p,p===page);
+  if (page > 1) mk('‹', page - 1);
+  [...Array(total).keys()].map(i => i + 1).filter(p => p === 1 || p === total || Math.abs(p - page) <= 2).forEach((p, i, a) => {
+    if (i && p - a[i - 1] > 1) { const sp = document.createElement('span'); sp.textContent = '…'; sp.style.cssText = 'padding:0 4px;color:var(--mid);font-size:.74rem;align-self:center'; pb.appendChild(sp); }
+    mk(p, p, p === page);
   });
-  if(page<total) mk('›',page+1);
+  if (page < total) mk('›', page + 1);
 }
 
-function renderStats() {
-  const total = ALL.reduce((s,r)=>s+r.amount,0);
-  const avg = ALL.length ? total/ALL.length : 0;
-  const top = ALL.reduce((m,r)=>r.amount>(m?.amount||0)?r:m,null);
-  document.getElementById('sDonors').textContent = ALL.length.toLocaleString();
-  document.getElementById('sTotal').textContent = fmtMoney(total);
-  document.getElementById('sAvg').textContent = fmtMoney(Math.round(avg));
-  document.getElementById('sTopName').textContent = top ? top.name.split(',')[0] : '—';
-  document.getElementById('sTopAmt').textContent = top ? fmtMoney(top.amount) : '';
+function doSort(f) {
+  if (sortField === f) sortDir = sortDir === 'asc' ? 'desc' : 'asc';
+  else { sortField = f; sortDir = f === 'amount' ? 'desc' : 'asc'; }
+  document.querySelectorAll('thead th').forEach(t => t.classList.remove('sorted'));
+  applyAll();
 }
 
-function sort(field) {
-  if(sortField===field) sortDir=sortDir==='asc'?'desc':'asc';
-  else{sortField=field;sortDir=field==='amount'?'desc':'asc';}
-  document.querySelectorAll('thead th').forEach(t=>t.classList.remove('sorted'));
-  const keyMap={name:'s-name',amount:'s-amount',date:'s-date'};
-  if(keyMap[field]){const el=document.getElementById(keyMap[field]);if(el){el.textContent=sortDir==='asc'?'↑':'↓';el.closest('th').classList.add('sorted');}}
-  FILTERED.sort((a,b)=>{
-    let va=a[field]||'',vb=b[field]||'';
-    if(field==='amount'){va=+va;vb=+vb;}
-    const c=typeof va==='number'?va-vb:String(va).localeCompare(String(vb));
-    return sortDir==='asc'?c:-c;
-  });
-  page=1; renderPage();
+// ── AI Analysis ───────────────────────────────────────────────────────
+let aiTimer;
+function runAI() {
+  clearTimeout(aiTimer);
+  aiTimer = setTimeout(async () => {
+    if (FILTERED.length < 3) return;
+    const box = document.getElementById('aibox'), txt = document.getElementById('aitext');
+    box.classList.add('on'); txt.textContent = 'Analyzing…';
+
+    const tot = FILTERED.reduce((s, r) => s + r.amount, 0);
+    const top5 = FILTERED.slice(0, 5).map(r => `${r.name} (${fmtM(r.amount)})`).join(', ');
+    const empMap = {}; FILTERED.forEach(r => { if (r.employer) empMap[r.employer] = (empMap[r.employer] || 0) + r.amount; });
+    const topEmp = Object.entries(empMap).sort((a, b) => b[1] - a[1]).slice(0, 5).map(([e, a]) => `${e}: ${fmtM(a)}`).join(', ');
+    const orgs = FILTERED.filter(r => r.isOrg);
+    const judgeFilter = document.getElementById('iName').value.trim() || 'this candidate';
+
+    try {
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514', max_tokens: 600,
+          system: 'You are a legal research analyst. Analyze NC judicial campaign finance data. Write 2-3 tight paragraphs of plain prose. No bullets. Be useful to an attorney who may appear before this judge.',
+          messages: [{ role: 'user', content: `Candidate: ${judgeFilter}\nTotal: ${fmtM(tot)} from ${FILTERED.length} donors\nTop donors: ${top5}\nTop employers: ${topEmp}\nOrgs/PACs: ${orgs.length} totaling ${fmtM(orgs.reduce((s, r) => s + r.amount, 0))}\n\nWrite a brief donor intelligence analysis focusing on: dominant industries, what they suggest about this judge, and any donors attorneys should flag for conflict checks.` }]
+        })
+      });
+      const d = await res.json();
+      txt.textContent = d?.content?.[0]?.text || fallbackAI(judgeFilter);
+    } catch (e) { txt.textContent = fallbackAI(judgeFilter); }
+  }, 800);
 }
 
-// ─── AI Analysis ──────────────────────────────────────────────────────────
-async function runAI(name, records) {
-  const box = document.getElementById('aibox'), txt = document.getElementById('aitext');
-  box.className = 'aibox on'; txt.textContent = 'Analyzing donor patterns…';
-
-  const total = records.reduce((s,r)=>s+r.amount,0);
-  const top5 = [...records].sort((a,b)=>b.amount-a.amount).slice(0,5).map(r=>`${r.name} (${fmtMoney(r.amount)})`).join(', ');
-  const empMap = {}; records.forEach(r=>{if(r.employer) empMap[r.employer]=(empMap[r.employer]||0)+r.amount;});
-  const topEmp = Object.entries(empMap).sort((a,b)=>b[1]-a[1]).slice(0,5).map(([e,a])=>`${e}: ${fmtMoney(a)}`).join(', ');
-  const orgs = records.filter(r=>r.isOrg);
-  const summary = `Candidate: ${name}\nTotal ($1k+): ${fmtMoney(total)} from ${records.length} donors\nTop donors: ${top5}\nTop employers: ${topEmp}\nOrgs/PACs: ${orgs.length} (${fmtMoney(orgs.reduce((s,r)=>s+r.amount,0))})\nDate range: ${records.map(r=>r.date).sort()[0]} to ${records.map(r=>r.date).sort().reverse()[0]}`;
-
-  try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({
-        model:'claude-sonnet-4-20250514', max_tokens:800,
-        system:'You are a legal research analyst at a NC law firm. Analyze judicial campaign finance data. Write 3 tight paragraphs of plain prose — no bullets, no headers. Be practically useful to an attorney appearing before this judge.',
-        messages:[{role:'user',content:`Analyze this NC judicial campaign finance data and write a brief intelligence report:\n\n${summary}\n\nFocus: (1) dominant donor industries and what they suggest about the judge's likely sympathies, (2) geographic distribution, (3) specific donors or orgs an attorney should know about for recusal research.`}]
-      })
-    });
-    const data = await res.json();
-    txt.textContent = data?.content?.[0]?.text || buildFallbackAI(name, records);
-  } catch(e) {
-    txt.textContent = buildFallbackAI(name, records);
-  }
+function fallbackAI(judge) {
+  const tot = FILTERED.reduce((s, r) => s + r.amount, 0);
+  const orgs = FILTERED.filter(r => r.isOrg);
+  const lawyers = FILTERED.filter(r => /(attorney|counsel|law|llp|pllc)/i.test(`${r.employer} ${r.occupation}`));
+  const top = FILTERED[0];
+  return `The ${judge} campaign received ${FILTERED.length} qualifying contributions totaling ${fmtM(tot)}. ${lawyers.length > 2 ? `Attorney and law firm donors represent a significant bloc (${lawyers.length} contributors), consistent with bar association support for judicial candidates.` : ''} The largest contribution of ${fmtM(top?.amount || 0)} came from ${top?.name || 'unknown'}${top?.employer ? ` (${top.employer})` : ''}.\n\n${orgs.length > 0 ? `Organizational donors and PACs contributed ${fmtM(orgs.reduce((s, r) => s + r.amount, 0))} across ${orgs.length} entities. Attorneys with active matters before this judge should review these donors for potential conflict issues.` : 'The donor base is primarily individual contributors with limited PAC involvement.'}`;
 }
 
-function buildFallbackAI(name, records) {
-  const total = records.reduce((s,r)=>s+r.amount,0);
-  const orgs = records.filter(r=>r.isOrg);
-  const lawyers = records.filter(r=>/(attorney|counsel|law|llp|pllc)/i.test(`${r.employer} ${r.occupation}`));
-  const top = [...records].sort((a,b)=>b.amount-a.amount)[0];
-  const triangle = records.filter(r=>/raleigh|cary|durham|chapel hill/i.test(r.city||''));
-  return `The ${name} campaign received ${records.length} qualifying contributions totaling ${fmtMoney(total)}. ${lawyers.length > 2 ? `Attorneys and law firm employees represent a significant donor bloc (${lawyers.length} contributors), which is typical for judicial candidates with bar association backing.` : ''} The largest single contribution of ${fmtMoney(top?.amount||0)} came from ${top?.name||'unknown'}${top?.employer?` (${top.employer})`:''}.\n\n${orgs.length > 0 ? `Organizational donors and PACs contributed ${fmtMoney(orgs.reduce((s,r)=>s+r.amount,0))} across ${orgs.length} entities. Attorneys appearing before this judge should review these organizational donors for any current or potential conflicts.` : 'Individual contributors dominate the donor base, with limited PAC involvement.'}\n\nGeographically, ${triangle.length > records.length * 0.4 ? 'the donor base is concentrated in the Triangle (Raleigh/Durham/Chapel Hill area), suggesting strong support from the legal and university communities in that region' : 'donors are distributed across the state, indicating broader statewide support'}. Counsel with matters before this judge may wish to run a conflict check against this donor list.`;
-}
-
-// ─── UI helpers ───────────────────────────────────────────────────────────
-function setStatus(type, msg, showTime=false) {
-  const cls = {live:'live',loading:'loading',warn:'warn',error:'error'}[type]||'';
-  document.getElementById('sdot').className = 'sdot ' + cls;
-  document.getElementById('smsg').innerHTML = msg;
-  document.getElementById('stime').textContent = showTime ? `Updated: ${new Date().toLocaleTimeString()}` : '';
-}
-function setBusy(b) {
-  document.getElementById('btnRun').disabled = b;
-  document.getElementById('btnIcon').textContent = b ? '⏳' : '⚖';
-}
-function showSkel() {
-  document.getElementById('tbody').innerHTML = Array(8).fill(0).map(()=>`<tr class="skel">${Array(8).fill('<td>████████████</td>').join('')}</tr>`).join('');
-  document.getElementById('stats').style.display = 'none';
-  document.getElementById('fbar').style.display = 'none';
-  document.getElementById('aibox').className = 'aibox';
-}
-function showEmpty(title, sub) {
-  document.getElementById('tbody').innerHTML = `<tr><td colspan="8"><div class="empty"><div class="eicon">🔍</div><div class="etitle">${esc(title)}</div><div class="esub">${esc(sub)}</div></div></td></tr>`;
-  document.getElementById('stats').style.display = 'none';
-  document.getElementById('fbar').style.display = 'none';
-}
-function fmtMoney(n){return new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',minimumFractionDigits:0,maximumFractionDigits:0}).format(n||0)}
-function fmtDate(d){if(!d)return'—';try{return new Date(d+'T12:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}catch(e){return d;}}
-function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
-function showHelp(){document.getElementById('helpModal').classList.add('open')}
-function closeHelp(){document.getElementById('helpModal').classList.remove('open')}
-
+// ── Export ────────────────────────────────────────────────────────────
 function exportCSV() {
-  if(!FILTERED.length) return;
-  const h = ['Donor Name','Address','City','State','ZIP','Employer','Occupation','Amount','Date','Committee'];
-  const rows = FILTERED.map(r=>[r.name,r.addr,r.city,r.state,r.zip,r.employer,r.occupation,r.amount,r.date,r.committee].map(v=>`"${String(v||'').replace(/"/g,'""')}"`).join(','));
-  const cand = document.getElementById('iName').value.trim().replace(/\s+/g,'-')||'donors';
-  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([[h.join(','),...rows].join('\n')],{type:'text/csv'}));a.download=`${cand}-donors-${new Date().toISOString().slice(0,10)}.csv`;a.click();
+  if (!FILTERED.length) return;
+  const h = ['Donor','Address','City','State','ZIP','Employer','Occupation','Amount','Date','Committee'];
+  const rows = FILTERED.map(r => [r.name, r.addr, r.city, r.state, r.zip, r.employer, r.occupation, r.amount, r.date, r.committee].map(v => `"${String(v || '').replace(/"/g, '""')}"`).join(','));
+  const name = (document.getElementById('iName').value.trim() || 'donors').replace(/\s+/g, '-');
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([[h.join(','), ...rows].join('\n')], { type: 'text/csv' })); a.download = `${name}-${new Date().toISOString().slice(0, 10)}.csv`; a.click();
 }
 
 function exportPDF() {
-  const cand = document.getElementById('iName').value.trim() || 'Candidate';
-  const total = FILTERED.reduce((s,r)=>s+r.amount,0);
-  const w = window.open('','_blank');
-  w.document.write(`<!DOCTYPE html><html><head><title>NC Judicial Donor Report — ${cand}</title>
-<style>body{font-family:Georgia,serif;margin:40px;color:#1B2A4A;font-size:11px}h1{font-size:20px;margin-bottom:4px}.sub{color:#666;font-size:10px;margin-bottom:16px}.tot{font-weight:bold;background:#f5f0e8;padding:7px;margin-bottom:14px}table{width:100%;border-collapse:collapse;font-size:10px}th{background:#1B2A4A;color:white;padding:5px 7px;text-align:left}td{padding:4px 7px;border-bottom:1px solid #eee}tr:nth-child(even) td{background:#fafafa}.foot{margin-top:18px;font-size:8px;color:#999;border-top:1px solid #ccc;padding-top:8px}</style>
-</head><body>
-<h1>NC Judicial Donor Intelligence Report</h1>
-<div class="sub">Candidate: <strong>${cand}</strong> · Min: $${(parseFloat(document.getElementById('iMin').value)||1000).toLocaleString()} · Generated: ${new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})} · Source: NCSBE</div>
-<div class="tot">${FILTERED.length} qualifying contributions totaling ${fmtMoney(total)}</div>
+  const judge = document.getElementById('iName').value.trim() || 'All Judges';
+  const tot = FILTERED.reduce((s, r) => s + r.amount, 0);
+  const w = window.open('', '_blank');
+  w.document.write(`<!DOCTYPE html><html><head><title>NC Judicial Donor Report — ${judge}</title>
+<style>body{font-family:Georgia,serif;margin:40px;color:#1B2A4A;font-size:11px}h1{font-size:18px;margin-bottom:3px}.sub{color:#666;font-size:9px;margin-bottom:14px}.tot{font-weight:bold;background:#f5f0e8;padding:6px;margin-bottom:12px}table{width:100%;border-collapse:collapse;font-size:10px}th{background:#1B2A4A;color:white;padding:5px 7px;text-align:left}td{padding:4px 7px;border-bottom:1px solid #eee}tr:nth-child(even) td{background:#fafafa}.foot{margin-top:16px;font-size:8px;color:#999;border-top:1px solid #ccc;padding-top:8px}</style>
+</head><body><h1>NC Judicial Donor Intelligence</h1>
+<div class="sub">Judge/Candidate: <strong>${judge}</strong> · Generated: ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })} · Source: NCSBE</div>
+<div class="tot">${FILTERED.length} donors · ${fmtM(tot)} total</div>
 <table><thead><tr><th>Donor</th><th>City/State</th><th>Employer</th><th>Occupation</th><th>Amount</th><th>Date</th></tr></thead>
-<tbody>${FILTERED.map(r=>`<tr><td>${esc(r.name)}</td><td>${esc(r.city||'')}${r.state?', '+r.state:''}</td><td>${esc(r.employer||'—')}</td><td>${esc(r.occupation||'—')}</td><td style="text-align:right;font-weight:600">${fmtMoney(r.amount)}</td><td>${fmtDate(r.date)}</td></tr>`).join('')}</tbody>
-</table>
-<div class="foot">All data public record per N.C.G.S. § 163-278.11 · NCSBE Public Campaign Finance Database · For legal/research use only</div>
+<tbody>${FILTERED.map(r => `<tr><td>${esc(r.name)}</td><td>${esc(r.city || '')}${r.state ? ', ' + r.state : ''}</td><td>${esc(r.employer || '—')}</td><td>${esc(r.occupation || '—')}</td><td style="text-align:right;font-weight:600">${fmtM(r.amount)}</td><td>${fmtD(r.date)}</td></tr>`).join('')}</tbody>
+</table><div class="foot">Public record per N.C.G.S. § 163-278.11 · NCSBE Campaign Finance Database · Not legal advice</div>
 </body></html>`);
-  w.document.close(); setTimeout(()=>w.print(),500);
+  w.document.close(); setTimeout(() => w.print(), 500);
 }
 
-// Enter key support
-['iName','iDonor'].forEach(id => document.getElementById(id).addEventListener('keydown', e => { if(e.key==='Enter') runSearch(); }));
+// ── Helpers ───────────────────────────────────────────────────────────
+function setUploadStatus(dotClass, msg) {
+  document.getElementById('uploadDot').className = 'spill-dot' + (dotClass ? ' ' + dotClass : '');
+  document.getElementById('uploadMsg').textContent = msg;
+}
+function fmtM(n) { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(n || 0); }
+function fmtD(d) { if (!d) return '—'; try { return new Date(d + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); } catch (e) { return d; } }
+function esc(s) { return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+function showHelp() { document.getElementById('helpModal').style.display = 'flex'; }
 </script>
 </body>
 </html>
